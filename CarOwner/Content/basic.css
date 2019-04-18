@@ -1,0 +1,142 @@
+﻿/*bg*/
+.bg.b-pink {
+    background-color: #f62459;
+}
+
+/*text*/
+.text.t-white {
+    color:#fff;
+}
+
+.text.t-bold {
+    font-weight:bold;
+}
+/*margin*/
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.margin-top-50 {
+    margin-top: 50px !important;
+}
+
+.margin-left-15 {
+    margin-left: 15px !important;
+}
+
+.margin-right-15 {
+    margin-right: 15px !important;
+}
+
+
+
+/*padding*/
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-padding-right {
+    padding-right: 0 !important;
+}
+
+.padding-15 {
+    padding: 15px !important;
+}
+
+.padding-left-15 {
+    padding-left: 15px !important;
+}
+
+.padding-right-15 {
+    padding-right: 15px !important;
+}
+
+
+/*height line-height*/
+.h30.lh30 {
+    height: 30px;
+    line-height: 30px;
+}
+
+.h50.lh50 {
+    height: 50px;
+    line-height: 50px;
+}
+
+/*input*/
+.input {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    background-color: #f4dee4;
+    line-height: 40px;
+    border-radius: 0;
+    overflow: hidden;
+    border: none;
+    text-indent: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    transition: all .30s ease;
+}
+
+/*width*/
+.w100p {
+    width: 100%;
+}
+
+.w10p {
+    width: 10%;
+}
+
+.w15p {
+    width: 15%;
+}
+
+.w20p {
+    width: 20%;
+}
+
+.w60p {
+    width: 60%;
+}
+
+.w70p {
+    width: 70%;
+}
+
+.w80p {
+    width: 80%;
+}
+
+/*button*/
+.button {
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.button.btn-pink {
+    color: #fff;
+    background-color: #F62459;
+}
+
+.button.btn-white {
+    color: #007fff;
+    background-color: #e6e6e6;
+}
+
+/*position*/
+.pos-ab {
+    position: absolute;
+}
+
+.pos-re {
+    position: relative;
+}
