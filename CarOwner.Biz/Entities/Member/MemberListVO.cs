@@ -20,7 +20,7 @@ namespace CarOwner.Biz.Entities.Member
         /// <summary>
         /// 사용자 성명(상호)
         /// </summary>
-        public string UserName { get; set; }
+        public string UserNm { get; set; }
 
     }
 }

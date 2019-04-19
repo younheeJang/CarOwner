@@ -18,14 +18,7 @@ namespace CarOwner.Biz.Service.Dac
         {
             try
             {
-                const string sql =
-                @"SELECT
-                        NAME, MILEAGE
-                  FROM
-                        FS_DRIVER
-                  WHERE LOGINID = :loginId
-                       AND LOGINPW = :password
-                ";
+                const string sql = "SELECT LOGINID as UserId, NAME as UserNm, MILEAGE as Mileage FROM FS_DRIVER WHERE LOGINID = @loginId AND LOGINPW = @password";
 
                 return _db.Query<MemberListVO>(sql, new { loginId, password }).FirstOrDefault();
             }

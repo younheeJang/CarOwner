@@ -7,30 +7,6 @@
     @Scripts.Render("~/bundles/js")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script>
-        //유효 스코프의 범위를 고려해 가장 위에 선언해 둠.
-        let userid, userpassword;
-        window.onload = function () {
-            userid = d.getElementById("userid");
-            userpassword = window.document.getElementById("userpassword");
-            alert('유닛뚜로그인투유즈디스서비뚜');
-            log(userid);
-            log(userpassword);
-        }
-
-        //로그인 값을 체크하는 함수: 특이사항 사용자가 버튼으로 직접 요청시 작동하는 함수.
-
-        //로그인 값을 가지고 서버로 전송하는 함수: 특이사항 사용자가 버튼으로 직접 요청시 작동하는 함수 로그인 체크 함수 안에서 이뤄지는 ㅎ마수.
-
-        //이미 로그인을 했다면 다시 로그인 함수를 사용할 필요가 없으므로 쿠키의 값 여부를 판별할 수 있는 함수를 만든다.
-        //: 특이사항 사용자가 버튼으로 직접 요청하지 않고, 그냥 모든 페이지의 요청마다, 이 함수가 자동으로 실행되도록 온로드 안에 포함시킬 함수.
-
-        //쿠키의 값 여부를 판단한 함수 이후에, 
-        //:; 특이사항 있다면 로그인 함수 대신 화면에 출력할 사용자 아이디와 사용자 마일리지 등의 정보를 가져와 활용할 수 있도록 하는 함수를 만든다
-
-
-
-    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top bg b-pink">
@@ -54,15 +30,24 @@
     </div>
     <div class="container">
         <div class="row h50 lh50">
-            <div class="col-xs-5 col-lg-5">
-                <input class="input" id="userid" placeholder="ID" style="width:100%;" />
+            <div class="padding-left-15">
+                <div class="padding-right-15">
+                    <div class="col-xs-5 no-padding pos-re">
+                        <input class="input pos-ab left-0" id="userid" placeholder="ID"/>
+                    </div>
+                    <div class="col-xs-5 padding-left-15 no-padding pos-re">
+                        <input class="pos-ab left-05 input" id="userpassword" placeholder="PW"/>
+                    </div>
+                    <div class="col-xs-2 padding-left-15 no-padding ">
+                        <button class="button btn-pink" id="login" onclick="send_login_req()">
+                            <span class="top-0">GO</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-5 col-lg-5">
-                <input class="input" id="userpassword" placeholder="PW" style="width:100%;" />
-            </div>
-            <div class="col-xs-2 col-lg-2">
-                <button class="button btn-pink">Log in</button>
-            </div>
+            
+            
+
         </div>
     </div>
     <div class="container body-content">
@@ -77,6 +62,89 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        //유효 스코프의 범위를 고려해 가장 위에 선언해 둠.
+        let userid, userpassword, login;
+        login = d.getElementById("login");
+
+        /*
+        login.onclick = function login() {
+            userid = d.getElementById("userid").value;
+            userpassword = d.getElementById("userpassword").value;
+            log(userid, userpassword);
+        }
+        */
+
+
+        ///step00
+        //아이디와 비밀번호를 얻는다.
+        let get_idpw = () => {
+            userid = d.getElementById("userid").value;
+            userpassword = d.getElementById("userpassword").value;
+        }
+
+        ///step01
+        //로그인 값을 체크하는 함수: 특이사항 사용자가 버튼으로 직접 요청시 작동하는 함수.:login_value_check
+        let login_value_check = () => {
+
+            get_idpw();
+
+            if (!checkNull(userid) || !checkNull(userpassword)) {
+                return false;
+            }
+
+            let res = {
+                userid, userpassword
+            };
+            return res;
+        }
+
+        
+
+        window.onload = function () {
+            
+        }
+
+
+        ///step02
+        //로그인 값을 가지고 서버로 전송하는 함수: 특이사항 사용자가 버튼으로 직접 요청시 작동하는 함수 로그인 체크 함수 안에서 이뤄지는 ㅎ마수.
+        let send_login_req = () => {
+            let value = login_value_check();
+            if (value) {
+                log(value);
+                $.post("@Url.Action("Login", "Home")", value, (res) => {
+                    log(res);
+                })
+                .done(function () {
+                    //alert("second success");
+                })
+                .fail(function (request, status, error) {
+                        alert(error);
+                })
+                .always(function () {
+                    //alert("finished");
+                });
+             
+            } else if (value === false) {
+                alert('아이디 혹은 비밀번호를 확인하세요');
+            }
+            
+            
+
+        }
+
+        
+        ///실행코드
+        //login.addEventListener("click", send_login_req, false);        
+            //이미 로그인을 했다면 다시 로그인 함수를 사용할 필요가 없으므로 쿠키의 값 여부를 판별할 수 있는 함수를 만든다.
+            //: 특이사항 사용자가 버튼으로 직접 요청하지 않고, 그냥 모든 페이지의 요청마다, 이 함수가 자동으로 실행되도록 온로드 안에 포함시킬 함수.
+
+            //쿠키의 값 여부를 판단한 함수 이후에,
+            //:; 특이사항 있다면 로그인 함수 대신 화면에 출력할 사용자 아이디와 사용자 마일리지 등의 정보를 가져와 활용할 수 있도록 하는 함수를 만든다
+
+
+
+    </script>
 </body>
 </html>
 

@@ -66,11 +66,13 @@
 
 /*input*/
 .input {
-    display: inline-block;
+    margin:0 auto;
+    display: table;
     width: 100%;
-    height: 40px;
+    height: 50px;
+    line-height:50px;
     background-color: #f4dee4;
-    line-height: 40px;
+    line-height: 50px;
     border-radius: 0;
     overflow: hidden;
     border: none;
@@ -79,6 +81,10 @@
     box-sizing: border-box;
     padding: 10px 10px;
     transition: all .30s ease;
+}
+
+.input:focus {
+    outline: 3px solid #f62459;
 }
 
 /*width*/
@@ -112,14 +118,24 @@
 
 /*button*/
 .button {
+    width:100%;
+    margin: 0 auto;
     border: none;
-    padding: 15px 32px;
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: table;
     font-size: 16px;
     cursor: pointer;
     font-weight: 700;
+    height: 50px;
+}
+
+.button:active {
+    outline:none;
+}
+
+.button span {
+    display: block;
+    text-align: center;
 }
 
 .button.btn-pink {
@@ -132,6 +148,8 @@
     background-color: #e6e6e6;
 }
 
+
+
 /*position*/
 .pos-ab {
     position: absolute;
@@ -139,4 +157,25 @@
 
 .pos-re {
     position: relative;
+}
+
+/*top bottom left right*/
+.top-0 {
+    top:0;
+}
+
+.left-0 {
+    left:0;
+}
+
+.left-05 {
+    left:5px;
+}
+
+.left-10 {
+    left:10px;
+}
+
+.right-0 {
+    right:0;
 }

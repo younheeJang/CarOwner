@@ -14,12 +14,11 @@ namespace CarOwner.Biz.DB
                 return new DBInformation()
                 {
 
-                    IP = "localhost",
+                    IP = "192.168.0.70",
                     Port = 3306,
-
                     ID = "onecall_test",
                     Password = "1call",
-                    ServiceName = "MYSQL"
+                    ServiceName = "onecall_test"
                 };
             }
         }
