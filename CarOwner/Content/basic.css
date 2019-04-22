@@ -8,6 +8,10 @@
     color:#fff;
 }
 
+.text.t-pink {
+    color: #f62459;
+}
+
 .text.t-bold {
     font-weight:bold;
 }

@@ -12,32 +12,19 @@
     <div class="navbar navbar-inverse navbar-fixed-top bg b-pink">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+                <div id="user_zone_hamberger"></div>
                 <a href="@Url.Action("Index", "Home")" class="navbar-brand text t-bold t-white">CarOwner</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index", "Home")" class="text t-bold t-white">Home</a></li>
-                    <li><a href="@Url.Action("About", "Home")" class="text t-bold t-white">About</a></li>
-                    <li><a href="@Url.Action("Contact", "Home")" class="text t-bold t-white">Contact</a></li>
+                <ul class="nav navbar-nav" id="user_zone_nav">
                 </ul>
             </div>
         </div>
     </div>
     <div class="container">
+        
         <div class="row h50 lh50 padding-left-15 padding-right-15">
-        
-            
-               
-            <div id="user_zone">
-
-
-            </div>
-        
+            <div id="user_zone"></div>
         </div>
     </div>
     <div class="container body-content">
@@ -94,8 +81,9 @@
         window.onload = function () {
             //쿠키가 있는지 없는지의 여부를 확인해 다른 화면을 렌더링한다
             let getUserInfo = getCookie(['CarOwnerId', 'CarOwnerNm', 'CarOwnerMi']);
+            let user_zone = d.getElementById('user_zone');
+            let user_zone_nav = d.getElementById('user_zone_nav');;
             if (!getUserInfo) {
-                let user_zone = d.getElementById('user_zone');
                 user_zone.innerHTML = `
                     <div class="col-xs-5 no-padding pos-re">
                         <input type="text" class="input pos-ab left-0" id="userid" placeholder="ID" />
@@ -110,7 +98,28 @@
                     </div>
                 `;
             } else {
-                alert(getUserInfo);
+                let userNm = (getUserInfo['CarOwnerNm'])[1];
+                let userMi = (getUserInfo['CarOwnerMi'])[1];
+                user_zone_nav.innerHTML = `
+                    <li><a href="@Url.Action("Index", "Home")" class="text t-bold t-white">Home</a></li>
+                    <li><a href="@Url.Action("OrderList", "Home")" class="text t-bold t-white">운송정보</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")" class="text t-bold t-white">Contact</a></li>
+                `;
+                user_zone.innerHTML = `
+                    <div class="col-xs-10 no-padding text t-bold t-pink">
+                        <span class=" text t-bold t-pink">${userNm}</span><span>님, </span>
+                        <span class=" text t-bold t-pink">${userMi}</span><span>마일리지 있어요!</span>
+                    </div>
+                    <div class="col-xs-2 padding-left-15 no-padding">
+                    </div>
+                `;
+                user_zone_hamberger.innerHTML = `
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                `;
             }
         }
 
@@ -125,11 +134,10 @@
                 $.post("@Url.Action("Login", "Home")", value, (res) => {
                     if (res) {
                         //log(res);
-                        let getUserInfo = getCookie(['CarOwnerId', 'CarOwnerNm', 'CarOwnerMi']);
-                        let userNm = (getUserInfo['CarOwnerNm'])[1];
-                        let userMi = (getUserInfo['CarOwnerMi'])[1];
-                      
-                       
+                        //로그인 버튼을 누르고, 제대로 된 응답이 왔다면 이미, 컨트롤러에 쿠키가 저장되어 있을 것임.
+                        //따로 로그인 절차를 거칠 필요가 없다. 
+                        //그냥 홈 리다이렉트
+                        location.reload();
                         
                     } else {
                         alert('아이디 혹은 비밀번호를 확인하세요');

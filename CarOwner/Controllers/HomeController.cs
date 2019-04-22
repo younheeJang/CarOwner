@@ -22,9 +22,9 @@ namespace CarOwner.Controllers
                 Response.Cookies["CarOwnerId"].Value = HttpUtility.UrlEncode(res.UserId);
                 Response.Cookies["CarOwnerNm"].Value = HttpUtility.UrlEncode(res.UserNm);
                 Response.Cookies["CarOwnerMi"].Value = HttpUtility.UrlEncode(res.Mileage.ToString());
-                //Response.Cookies["CarOwnerId"].Expires = DateTime.Now.AddDays(1);
-                //Response.Cookies["CarOwnerNm"].Expires = DateTime.Now.AddDays(1);
-                //Response.Cookies["CarOwnerMi"].Expires = DateTime.Now.AddDays(1);
+                Response.Cookies["CarOwnerId"].Expires = DateTime.Now.AddDays(1);
+                Response.Cookies["CarOwnerNm"].Expires = DateTime.Now.AddDays(1);
+                Response.Cookies["CarOwnerMi"].Expires = DateTime.Now.AddDays(1);
                 return Json(res);
             }
             else {
@@ -32,7 +32,7 @@ namespace CarOwner.Controllers
             }
         }
 
-        public ActionResult About()
+        public ActionResult OrderList()
         {
             ViewBag.Message = "Your application description page.";
 
