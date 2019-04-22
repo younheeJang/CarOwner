@@ -413,6 +413,9 @@ let checkNull = (a) => {
 
 
 /*functions about cookie*/
+
+
+/*
 const getCookieInfo = (a) => {
     arr = a.split(';');
     arr = flatten(go(arr, map(a => a.split('='))));
@@ -425,6 +428,45 @@ const cookie = (a) => {
     for (let i = 0; i < arr1.length; i++) { if (i % 2) { arr.push(arr1[i]); } else { } }
     return arr;
 }
+*/
+let getCookie = (arr) => {
+    let cookie = checkNull(document.cookie);
+    if (cookie) {
+        cookie = cookie.split(';');
+        let cookieArr = [];
+        let realCookieArr = [];
+
+        //후에 쿠키 배열에 접근할 수 있도록 키 프로퍼티를 집어넣은 배열을 리턴할 수 있도록 담을 빈 객체를 생성
+        let obj = {};
+        for (let i = 0; i < cookie.length; i++) {
+            //쿠키를 자른다
+            cookieArr.push(cookie[i].split('='));
+            for (let k = 0; k < arr.length; k++) {
+                //지정한 쿠키 이름과 갖고 들어온 쿠키 이름이 일치하는지 확인한다.
+                if (cookieArr[i][0] === arr[k]) {
+                    realCookieArr.push(cookieArr[i]);
+                } else { }
+            }
+        }
+        for (let i = 0; i < arr.length; i++) {
+            obj[arr[i]] = realCookieArr[i];
+            log(obj);
+            //만약 해당 이름의 쿠키 값이 없다면, 설정한 모든 쿠키 이름으로 다 돌을 필요가 없으니 바로 리턴
+            if (obj[arr[i]] === undefined) {
+                return alert('로그인 해주세요');
+            }
+        }
+        //log(realCookieArr);
+        //쿠키는 있는데 해당 서비스 서버로부터 리턴받은 쿠키가 아니라면 혹은 맞다면의 판별여부에 따라 다른 값을 리턴한다
+        return obj;
+    } else {
+        //처음부터 쿠키가 없다면
+        alert('로그인 해주세요');
+    }
+
+}
+
+
 
 //for main page's list
 let just_four = (res) => {

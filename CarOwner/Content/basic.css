@@ -179,3 +179,8 @@
 .right-0 {
     right:0;
 }
+
+/*hide*/
+.hide {
+    display:none;
+}

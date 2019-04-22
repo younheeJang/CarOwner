@@ -27,8 +27,8 @@ namespace CarOwner.Controllers
                 //Response.Cookies["CarOwnerMi"].Expires = DateTime.Now.AddDays(1);
                 return Json(res);
             }
-            else { 
-                return Json(res);
+            else {
+                return null;
             }
         }
 

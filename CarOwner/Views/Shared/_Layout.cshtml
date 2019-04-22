@@ -29,25 +29,15 @@
         </div>
     </div>
     <div class="container">
-        <div class="row h50 lh50">
-            <div class="padding-left-15">
-                <div class="padding-right-15">
-                    <div class="col-xs-5 no-padding pos-re">
-                        <input class="input pos-ab left-0" id="userid" placeholder="ID"/>
-                    </div>
-                    <div class="col-xs-5 padding-left-15 no-padding pos-re">
-                        <input class="pos-ab left-05 input" id="userpassword" placeholder="PW"/>
-                    </div>
-                    <div class="col-xs-2 padding-left-15 no-padding ">
-                        <button class="button btn-pink" id="login" onclick="send_login_req()">
-                            <span class="top-0">GO</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div class="row h50 lh50 padding-left-15 padding-right-15">
+        
             
-            
+               
+            <div id="user_zone">
 
+
+            </div>
+        
         </div>
     </div>
     <div class="container body-content">
@@ -102,10 +92,30 @@
         
 
         window.onload = function () {
-            
+            //쿠키가 있는지 없는지의 여부를 확인해 다른 화면을 렌더링한다
+            let getUserInfo = getCookie(['CarOwnerId', 'CarOwnerNm', 'CarOwnerMi']);
+            if (!getUserInfo) {
+                let user_zone = d.getElementById('user_zone');
+                user_zone.innerHTML = `
+                    <div class="col-xs-5 no-padding pos-re">
+                        <input type="text" class="input pos-ab left-0" id="userid" placeholder="ID" />
+                    </div>
+                    <div class="col-xs-5 padding-left-15 no-padding pos-re">
+                        <input type="password" class="pos-ab left-05 input" id="userpassword" placeholder="PW" />
+                    </div>
+                    <div class="col-xs-2 padding-left-15 no-padding ">
+                        <button class="button btn-pink" id="login" onclick="send_login_req()">
+                            <span class="top-0">GO</span>
+                        </button>
+                    </div>
+                `;
+            } else {
+                alert(getUserInfo);
+            }
         }
 
 
+        
         ///step02
         //로그인 값을 가지고 서버로 전송하는 함수: 특이사항 사용자가 버튼으로 직접 요청시 작동하는 함수 로그인 체크 함수 안에서 이뤄지는 ㅎ마수.
         let send_login_req = () => {
@@ -113,7 +123,17 @@
             if (value) {
                 log(value);
                 $.post("@Url.Action("Login", "Home")", value, (res) => {
-                    log(res);
+                    if (res) {
+                        //log(res);
+                        let getUserInfo = getCookie(['CarOwnerId', 'CarOwnerNm', 'CarOwnerMi']);
+                        let userNm = (getUserInfo['CarOwnerNm'])[1];
+                        let userMi = (getUserInfo['CarOwnerMi'])[1];
+                      
+                       
+                        
+                    } else {
+                        alert('아이디 혹은 비밀번호를 확인하세요');
+                    }
                 })
                 .done(function () {
                     //alert("second success");
